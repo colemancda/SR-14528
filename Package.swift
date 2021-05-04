@@ -6,10 +6,16 @@ let package = Package(
     products: [
         .executable(
             name: "swift-bug-test",
-            targets: ["SR14528"]
+            targets: ["BugTool"]
         )
     ],
     targets: [
+        .target(
+            name: "BugTool",
+            dependencies: [
+                "SR14528"
+            ]
+        ),
         .target(
             name: "SR14528"
         ),

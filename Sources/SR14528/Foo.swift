@@ -7,26 +7,26 @@
 
 import Foundation
 
-class Foo {
+public class Foo {
     
-    let name: String
+    public let name: String
     
-    init(name: String) {
+    public init(name: String) {
         self.name = name
     }
     
-    func printName() {
+    public func printName() {
         print("I am \(name)")
     }
     
-    func printDate() {
+    public func printDate() {
         let date = Date()
         let dateString = Foo.dateFormatter.string(from: date)
         print("The time is \(dateString)")
     }
 }
 
-private extension Foo {
+internal extension Foo {
         
     static let dateFormatter: DateFormatter = {
         let formatter = DateFormatter()
