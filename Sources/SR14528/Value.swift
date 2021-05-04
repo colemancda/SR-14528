@@ -1,5 +1,5 @@
 //
-//  Foo.swift
+//  Value.swift
 //  
 //
 //  Created by Alsey Coleman Miller on 4/05/21.
@@ -7,7 +7,7 @@
 
 import Foundation
 
-public class Foo {
+public struct FooValue {
     
     public let name: String
     
@@ -16,18 +16,18 @@ public class Foo {
     }
     
     public func printName() {
-        print("I am \(name)")
+        print("I am \(name) (Value)")
     }
     
     public func printDate() {
         let date = Date()
-        let dateString = Foo.dateFormatter.string(from: date)
+        let dateString = FooObject.dateFormatter.string(from: date)
         print("The time is \(dateString)")
     }
 }
 
-internal extension Foo {
-        
+internal extension FooValue {
+    
     static let dateFormatter: DateFormatter = {
         let formatter = DateFormatter()
         formatter.dateStyle = .short
