@@ -4,13 +4,26 @@ import XCTest
 
 final class SR14528Tests: XCTestCase {
         
-    func testPerformanceInitialization() throws {
+    func testPerformanceObjectInitialization() throws {
         
         measure {
             for _ in 0 ..< 1_000_000 {
                 // create and release
-                var object: Foo?
-                object = Foo(name: "Test")
+                var object: FooObject?
+                object = FooObject(name: "Test")
+                _ = object // silence warning, prevent optimization
+                object = nil
+            }
+        }
+    }
+    
+    func testPerformanceValueWithReferenceTypesInitialization() throws {
+        
+        measure {
+            for _ in 0 ..< 1_000_000 {
+                // create and release
+                var object: FooValue?
+                object = FooValue(name: "Test")
                 _ = object // silence warning, prevent optimization
                 object = nil
             }
@@ -23,7 +36,7 @@ final class SR14528Tests: XCTestCase {
             for _ in 0 ..< 1_000_000 {
                 // create and release
                 var object: DateFormatter?
-                object = Foo.dateFormatter
+                object = FooObject.dateFormatter
                 _ = object // silence warning, prevent optimization
                 object = nil
             }
@@ -33,12 +46,12 @@ final class SR14528Tests: XCTestCase {
     func testPerformanceRetain() throws {
         
         let count = 1_000_000
-        var array = [Foo]()
+        var array = [FooObject]()
         array.reserveCapacity(count)
         measure {
             for _ in 0 ..< count {
                 // create and retain
-                let object = Foo(name: "Test")
+                let object = FooObject(name: "Test")
                 array.append(object)
             }
         }
@@ -47,11 +60,11 @@ final class SR14528Tests: XCTestCase {
     func testPerformanceRelease() throws {
         
         let count = 1_000_000
-        var array = [Foo]()
+        var array = [FooObject]()
         array.reserveCapacity(count)
         for _ in 0 ..< count {
             // create and retain
-            let object = Foo(name: "Test")
+            let object = FooObject(name: "Test")
             array.append(object)
         }
         measure {
@@ -59,5 +72,28 @@ final class SR14528Tests: XCTestCase {
             array.removeAll(keepingCapacity: true)
         }
         XCTAssert(array.isEmpty)
+    }
+    
+    func testPerformanceProtocol() throws {
+        
+        let count = 1_000_000
+        var array = [NameProtocol]()
+        array.reserveCapacity(count)
+        for index in 0 ..< count {
+            // create and retain
+            if index % 2 == 0 {
+                let value = FooValue(name: "Test")
+                array.append(value)
+            } else {
+                let object = FooObject(name: "Test")
+                array.append(object)
+            }
+        }
+        measure {
+            for value in array {
+                let _ = value.name
+            }
+            
+        }
     }
 }
