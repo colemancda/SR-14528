@@ -18,20 +18,27 @@ extension BugTool {
         @Option(default: 1_000_000, help: "Number of times to execute the test code.")
         var iterations: UInt
         
-        @_silgen_name("swift_test_release")
         func run() throws {
-            let count = Int(iterations)
-            var array = [FooObject]()
-            array.reserveCapacity(count)
-            for _ in 0 ..< count {
-                // create and retain
-                let object = FooObject(name: "Test")
-                array.append(object)
-            }
-            measure {
-                // release all objects
-                array.removeAll(keepingCapacity: true)
-            }
+            type(of: self).run(iterations: iterations)
+        }
+    }
+}
+
+extension BugTool.Release {
+    
+    @_silgen_name("swift_test_release")
+    static func run(iterations: UInt) {
+        let count = Int(iterations)
+        var array = [FooObject]()
+        array.reserveCapacity(count)
+        for _ in 0 ..< count {
+            // create and retain
+            let object = FooObject(name: "Test")
+            array.append(object)
+        }
+        measure {
+            // release all objects
+            array.removeAll(keepingCapacity: true)
         }
     }
 }

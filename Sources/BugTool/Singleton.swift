@@ -18,17 +18,8 @@ extension BugTool {
         @Option(default: 1_000_000, help: "Number of times to execute the test code.")
         var iterations: UInt
         
-        @_silgen_name("swift_test_singleton")
         func run() throws {
-            measure {
-                for _ in 0 ..< 1_000_000 {
-                    // access and release
-                    var object: FooObject?
-                    object = TestFoo.shared
-                    _ = object // silence warning, prevent optimization
-                    object = nil
-                }
-            }
+            type(of: self).run(iterations: iterations)
         }
     }
 }
@@ -38,5 +29,21 @@ extension BugTool.Singleton {
     class TestFoo {
         
         static let shared = FooObject(name: "Test")
+    }
+}
+
+extension BugTool.Singleton {
+    
+    @_silgen_name("swift_test_singleton")
+    static func run(iterations: UInt) {
+        measure {
+            for _ in 0 ..< iterations {
+                // access and release
+                var object: FooObject?
+                object = TestFoo.shared
+                _ = object // silence warning, prevent optimization
+                object = nil
+            }
+        }
     }
 }
