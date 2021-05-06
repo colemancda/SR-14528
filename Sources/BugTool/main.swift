@@ -10,7 +10,10 @@ struct BugTool: ParsableCommand {
         version: "1.0.0",
         subcommands: [
             ObjectInitialization.self,
-            ValueWithReferenceTypesInitialization.self
+            ValueWithReferenceTypesInitialization.self,
+            Singleton.self,
+            Retain.self,
+            Release.self
         ]
     )
 }
