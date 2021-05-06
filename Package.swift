@@ -9,10 +9,17 @@ let package = Package(
             targets: ["BugTool"]
         )
     ],
+    dependencies: [
+        .package(
+            url: "https://github.com/apple/swift-argument-parser",
+            .upToNextMinor(from: "0.1.0")
+        )
+    ],
     targets: [
         .target(
             name: "BugTool",
             dependencies: [
+                "ArgumentParser",
                 "SR14528"
             ]
         ),

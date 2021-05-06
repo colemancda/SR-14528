@@ -1,19 +1,18 @@
 import Foundation
 import Dispatch
 import SR14528
+import ArgumentParser
 
-func run() throws {
-    print("Hello, world!")
-    for index in 0 ..< 10 {
-        let object = FooObject(name: "Thing \(index + 1)")
-        object.printName()
-        object.printDate()
-        Thread.sleep(forTimeInterval: 1.0)
-    }
+struct BugTool: ParsableCommand {
+        
+    static let configuration = CommandConfiguration(
+        abstract: "Test tool for Swift performance.",
+        version: "1.0.0",
+        subcommands: [
+            ObjectInitialization.self,
+            ValueWithReferenceTypesInitialization.self
+        ]
+    )
 }
 
-do {
-    try run()
-} catch {
-    print("Error: \(error)")
-}
+BugTool.main()
