@@ -18,6 +18,7 @@ extension BugTool {
         @Option(default: 1_000_000, help: "Number of times to execute the test code.")
         var iterations: UInt
         
+        @_silgen_name("swift_test_weak_reference")
         func run() throws {
             let parent = PersonObject(name: "Parent")
             for _ in 0 ..< iterations {

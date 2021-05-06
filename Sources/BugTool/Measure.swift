@@ -7,6 +7,7 @@
 
 import Foundation
 
+@inline(__always)
 func measure(_ block: () -> ()) {
     let start = Date()
     block()

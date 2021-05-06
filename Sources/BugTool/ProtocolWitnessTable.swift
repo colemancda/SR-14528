@@ -18,6 +18,7 @@ extension BugTool {
         @Option(default: 1_000_000, help: "Number of times to execute the test code.")
         var iterations: UInt
         
+        @_silgen_name("swift_test_protocol_witness_table")
         func run() throws {
             let count = Int(iterations)
             var array = [NameProtocol]()
