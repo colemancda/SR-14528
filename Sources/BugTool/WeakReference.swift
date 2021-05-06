@@ -19,13 +19,14 @@ extension BugTool {
         var iterations: UInt
         
         func run() throws {
+            let parent = PersonObject(name: "Parent")
+            for _ in 0 ..< iterations {
+                let child = PersonObject(name: "Child")
+                parent.add(child: child)
+            }
             measure {
-                for _ in 0 ..< iterations {
-                    // create and release
-                    var object: FooValue?
-                    object = FooValue(name: "Test")
-                    _ = object // silence warning, prevent optimization
-                    object = nil
+                for child in parent.children {
+                    _ = child.parent
                 }
             }
         }
