@@ -13,7 +13,8 @@ struct BugTool: ParsableCommand {
             ValueWithReferenceTypesInitialization.self,
             Singleton.self,
             Retain.self,
-            Release.self
+            Release.self,
+            ProtocolWitnessTable.self
         ]
     )
 }
