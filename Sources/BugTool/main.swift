@@ -14,7 +14,8 @@ struct BugTool: ParsableCommand {
             Singleton.self,
             Retain.self,
             Release.self,
-            ProtocolWitnessTable.self
+            ProtocolWitnessTable.self,
+            WeakReference.self
         ]
     )
 }

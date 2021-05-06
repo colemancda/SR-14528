@@ -96,4 +96,19 @@ final class SR14528Tests: XCTestCase {
             
         }
     }
+    
+    func testPerformanceWeakReferences() throws {
+        
+        let count = 1_000_000
+        let parent = PersonObject(name: "Parent")
+        for _ in 0 ..< count {
+            let child = PersonObject(name: "Child")
+            parent.add(child: child)
+        }
+        measure {
+            for child in parent.children {
+                _ = child.parent
+            }
+        }
+    }
 }
