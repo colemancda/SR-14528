@@ -13,18 +13,14 @@ extension BugTool {
     
     struct RunLoop: ParsableCommand {
         
-        static let configuration = CommandConfiguration(abstract: "Measure the performance of accessing weak references.")
-        
-        @Option(default: 1_000_000, help: "Number of times to execute the test code.")
-        var iterations: UInt
+        static let configuration = CommandConfiguration(abstract: "Measure the performance of running a run loop with a timer.")
         
         func run() throws {
-            typealias RunLoop = Foundation.RunLoop
             let foo = FooObject(name: "Test")
             let timer = Timer.scheduledTimer(withTimeInterval: 1.0, repeats: true) { _ in
                 foo.printDate()
             }
-            RunLoop.current.run()
+            Foundation.RunLoop.current.run()
         }
     }
 }
