@@ -3,6 +3,9 @@ import PackageDescription
 
 let package = Package(
     name: "SR14528",
+    platforms: [
+        .macOS(.v10_12)
+    ],
     products: [
         .executable(
             name: "swift-bug-test",

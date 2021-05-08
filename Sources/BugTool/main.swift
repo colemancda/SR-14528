@@ -4,8 +4,9 @@ import SR14528
 import ArgumentParser
 
 struct BugTool: ParsableCommand {
-        
+    
     static let configuration = CommandConfiguration(
+        commandName: "swift-bug-tool",
         abstract: "Test tool for Swift performance.",
         version: "1.0.0",
         subcommands: [
@@ -15,7 +16,8 @@ struct BugTool: ParsableCommand {
             Retain.self,
             Release.self,
             ProtocolWitnessTable.self,
-            WeakReference.self
+            WeakReference.self,
+            RunLoop.self
         ]
     )
 }
