@@ -7,6 +7,11 @@ let package = Package(
         .executable(
             name: "swift-bug-test",
             targets: ["BugTool"]
+        ),
+        .library(
+            name: "Bug",
+            type: .dynamic,
+            targets: ["SR14528"]
         )
     ],
     dependencies: [
