@@ -18,7 +18,8 @@ struct BugTool: ParsableCommand {
             ProtocolWitnessTable.self,
             WeakReference.self,
             RunLoop.self,
-            Dispatch.self
+            Dispatch.self,
+            MainThreadSleep.self
         ]
     )
 }
