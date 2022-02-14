@@ -16,11 +16,12 @@ extension BugTool {
         static let configuration = CommandConfiguration(abstract: "Main thread sleep.")
         
         func run() throws {
+            let endDate = Date() + 5
             let foo = FooObject(name: "Test")
             repeat {
                 foo.printDate()
                 Thread.sleep(forTimeInterval: 1.0)
-            } while true
+            } while Date() < endDate
         }
     }
 }

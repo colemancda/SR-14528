@@ -20,7 +20,7 @@ extension BugTool {
             let timer = Timer.scheduledTimer(withTimeInterval: 1.0, repeats: true) { _ in
                 foo.printDate()
             }
-            Foundation.RunLoop.current.run()
+            Foundation.RunLoop.current.run(until: Date() + 5)
         }
     }
 }

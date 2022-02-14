@@ -24,7 +24,7 @@ extension BugTool {
                     Thread.sleep(forTimeInterval: 1.0)
                 } while true
             }
-            Foundation.RunLoop.current.run()
+            Foundation.RunLoop.current.run(until: Date() + 5)
         }
     }
 }
